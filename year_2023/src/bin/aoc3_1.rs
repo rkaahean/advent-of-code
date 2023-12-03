@@ -3,14 +3,21 @@ use std::fs;
 fn main() {
     const PATH: &str = "/Users/rkaahean/projects/learnings/aoc_new/year_2023/src/data/aoc3.txt";
 
-
-    let contents = fs::read_to_string(PATH)
-            .expect("Failed to read file");
+    let contents = fs::read_to_string(PATH).expect("Failed to read file");
 
     let contents = contents.lines();
     let matrix: Vec<Vec<char>> = contents.map(|x| x.chars().collect::<Vec<char>>()).collect();
 
-    const DIRS: [(i32, i32);8] = [(0, 1), (1, 0), (-1, 0), (0, -1), (1, 1), (1, -1), (-1, 1), (-1, -1)];
+    const DIRS: [(i32, i32); 8] = [
+        (0, 1),
+        (1, 0),
+        (-1, 0),
+        (0, -1),
+        (1, 1),
+        (1, -1),
+        (-1, 1),
+        (-1, -1),
+    ];
 
     let col_len = matrix[0].len() as i32;
     let row_len = matrix.len() as i32;
@@ -20,7 +27,6 @@ fn main() {
     let mut sm = 0;
     for i in 0..row_len {
         for j in 0..col_len {
-
             let val = matrix.get(i as usize).unwrap().get(j as usize).unwrap();
             let num_val = val.to_string().parse::<i32>();
             if num_val.is_err() {
@@ -33,48 +39,53 @@ fn main() {
             }
             for (x, y) in DIRS {
                 let neigh_x = i as i32 + x;
-                let neigh_y = j as i32  + y;
-                if (neigh_x >= 0 && neigh_x < col_len) && (neigh_y >=0 && neigh_y < row_len) {
-                    let neigh_value = matrix.get(neigh_x as usize).unwrap().get(neigh_y as usize).unwrap();
+                let neigh_y = j as i32 + y;
+                if (neigh_x >= 0 && neigh_x < col_len) && (neigh_y >= 0 && neigh_y < row_len) {
+                    let neigh_value = matrix
+                        .get(neigh_x as usize)
+                        .unwrap()
+                        .get(neigh_y as usize)
+                        .unwrap();
                     if is_special(*neigh_value) {
                         sm += num;
                         nums.push((found_x, found_y));
                         break;
                     }
-                } 
+                }
             }
         }
     }
-    println!("Found nums {:?}", nums);
-
-    println!("Sum {}", sm);
+    println!("Part 1 {}", sm);
 }
 
-fn get_num_for_idx(i: usize, j: usize, matrix: &Vec<Vec<char>>) -> (i32, (usize, usize), (usize, usize)){
+fn get_num_for_idx(
+    i: usize,
+    j: usize,
+    matrix: &Vec<Vec<char>>,
+) -> (i32, (usize, usize), (usize, usize)) {
     let mut nums: Vec<char> = Vec::new();
     let row = matrix.get(i).unwrap();
-    
+
     let mut start_idx = (i, j);
     let mut end_idx = (i, j);
-    for idx in (0..j+1).rev() {
+    for idx in (0..j + 1).rev() {
         // println!("Getting {} {}", i, idx);
         let val = row.get(idx).unwrap();
         if val.is_numeric() {
             nums.push(*val)
-        }
-        else {
-            start_idx = (i, idx+1);
-            break
+        } else {
+            start_idx = (i, idx + 1);
+            break;
         }
         start_idx = (i, 0);
     }
     nums.reverse();
-    for idx in j+1..matrix[0].len() {
+    for idx in j + 1..matrix[0].len() {
         let val = row.get(idx).unwrap();
         if val.is_numeric() {
             nums.push(*val)
         } else {
-            end_idx = (i, idx-1);
+            end_idx = (i, idx - 1);
             break;
         }
         end_idx = (i, matrix[0].len() - 1)
@@ -85,6 +96,5 @@ fn get_num_for_idx(i: usize, j: usize, matrix: &Vec<Vec<char>>) -> (i32, (usize,
 }
 
 fn is_special(c: char) -> bool {
-
     !c.is_numeric() && c != '.'
 }
