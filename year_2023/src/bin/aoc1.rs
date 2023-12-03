@@ -5,7 +5,7 @@ extern crate regex;
 use regex::{Captures, Regex};
 
 fn main() {
-    const PATH: &str = "/Users/rkaahean/projects/learnings/aoc_new/year_2023/src/data/aoc1.txt";
+    const PATH: &str = "/Users/rkaahean/projects/learnings/advent_of_code/year_2023/src/data/aoc1.txt";
 
     let contents = fs::read_to_string(PATH).expect("Failed to read file");
 
