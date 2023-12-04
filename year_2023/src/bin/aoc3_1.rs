@@ -1,7 +1,8 @@
 use std::fs;
 
 fn main() {
-    const PATH: &str = "/Users/rkaahean/projects/learnings/advent_of_code/year_2023/src/data/aoc3.txt";
+    const PATH: &str =
+        "/Users/rkaahean/projects/learnings/advent_of_code/year_2023/src/data/aoc3.txt";
 
     let contents = fs::read_to_string(PATH).expect("Failed to read file");
 
