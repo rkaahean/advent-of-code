@@ -93,7 +93,7 @@ fn get_mapping(mappings: &Vec<Vec<i64>>, current: &Vec<i64>) -> Vec<i64> {
     for i in 0..current.len() {
         let mut item = current[i];
         // check if in the same range as previous element
-        if (item > prev_start && item < prev_end) && (i > 0 && current[i-1] + 1 == item){
+        if (item > prev_start && item < prev_end) && (i > 0 && current[i - 1] + 1 == item) {
             let last = new_items.last().unwrap();
             new_items.push(last + 1);
             continue;
