@@ -20,7 +20,6 @@ fn main() {
         } else if i == 1 {
             continue;
         }
-
         let map = line.split("=").collect::<Vec<&str>>();
 
         // get hashmap key
