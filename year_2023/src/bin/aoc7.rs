@@ -45,8 +45,8 @@ fn compare_card(hand_a: &(String, i32), hand_b: &(String, i32)) -> Ordering {
     constant_map.insert("3", 3);
     constant_map.insert("2", 2);
 
-    let (card_a, bid_a) = hand_a;
-    let (card_b, bid_b) = hand_b;
+    let (card_a, _) = hand_a;
+    let (card_b, _) = hand_b;
 
     let mut char_count_a: HashMap<char, i32> = HashMap::new();
 

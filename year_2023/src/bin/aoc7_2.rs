@@ -29,38 +29,6 @@ fn main() {
     println!("Part 1 {}", sm);
 }
 
-fn get_max_replaced_string(card: String, constant_map: HashMap<&str, i32>) -> String {
-    // hashmap of counts
-    let mut char_count: HashMap<char, i32> = HashMap::new();
-    for c in card.chars() {
-        char_count
-            .entry(c)
-            .and_modify(|counter| *counter += 1)
-            .or_insert(1);
-    }
-
-    // maximum number of times an element occurs
-    let card_max_count = char_count.values().fold(0, |acc, x| max(acc, *x));
-
-    // number of elements with the maximum
-    let x: Vec<char> = char_count
-        .keys()
-        .filter(|x| *char_count.get(x).unwrap() == card_max_count)
-        .map(|x| *x)
-        .collect::<Vec<char>>();
-
-    // go through chars with max, and replace "J" with it
-    let mut max_char = 'J';
-    for i in x {
-        let str_i = i.to_string();
-        let strength = constant_map.get(str_i.as_str()).unwrap();
-        let max_val = constant_map.get(max_char.to_string().as_str()).unwrap();
-        if strength > max_val {
-            max_char = i
-        }
-    }
-    card.replace("J", max_char.to_string().as_str())
-}
 
 fn compare_card(hand_a: &(String, i32), hand_b: &(String, i32)) -> Ordering {
     let mut constant_map = HashMap::new();
@@ -78,8 +46,8 @@ fn compare_card(hand_a: &(String, i32), hand_b: &(String, i32)) -> Ordering {
     constant_map.insert("2", 2);
     constant_map.insert("J", 1);
 
-    let (mut card_a, _) = hand_a.clone();
-    let (mut card_b, _) = hand_b.clone();
+    let ( card_a, _) = hand_a.clone();
+    let ( card_b, _) = hand_b.clone();
 
     let mut char_count_a: HashMap<char, i32> = HashMap::new();
 
