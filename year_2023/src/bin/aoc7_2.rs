@@ -29,7 +29,6 @@ fn main() {
     println!("Part 1 {}", sm);
 }
 
-
 fn compare_card(hand_a: &(String, i32), hand_b: &(String, i32)) -> Ordering {
     let mut constant_map = HashMap::new();
     constant_map.insert("A", 14);
@@ -46,8 +45,8 @@ fn compare_card(hand_a: &(String, i32), hand_b: &(String, i32)) -> Ordering {
     constant_map.insert("2", 2);
     constant_map.insert("J", 1);
 
-    let ( card_a, _) = hand_a.clone();
-    let ( card_b, _) = hand_b.clone();
+    let (card_a, _) = hand_a.clone();
+    let (card_b, _) = hand_b.clone();
 
     let mut char_count_a: HashMap<char, i32> = HashMap::new();
 

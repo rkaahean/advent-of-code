@@ -6,12 +6,14 @@ fn main() {
     let contents = fs::read_to_string(PATH).expect("Failed to read file");
     let contents = contents.lines();
 
-    let p1 = contents.clone().into_iter().fold(0, |acc, x| acc + part1(x));
+    let p1 = contents
+        .clone()
+        .into_iter()
+        .fold(0, |acc, x| acc + part1(x));
     let p2 = contents.into_iter().fold(0, |acc, x| acc + part2(x));
 
     println!("Part 1: {}", p1);
     println!("Part 2: {}", p2);
-
 }
 
 fn part1(line: &str) -> i32 {
