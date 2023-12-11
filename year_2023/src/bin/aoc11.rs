@@ -76,17 +76,14 @@ fn get_distance(
     let (y_start, y_end) = (y0.min(y1), y0.max(y1));
 
     // now to find how many double distances to add
-    let num_double_x = missing_rows
+    let num_gaps_x = missing_rows
         .iter()
         .filter(|x| **x as i32 - x_start > 0 && **x as i32 - x_end < 0)
         .count();
-    let num_double_y = missing_cols
+    let num_gaps_y = missing_cols
         .iter()
         .filter(|y| **y as i32 - y_start > 0 && **y as i32 - y_end < 0)
         .count();
 
-    x_dist
-        + y_dist
-        + (gap_length - 1) * num_double_x as i64
-        + (gap_length - 1) * num_double_y as i64
+    x_dist + y_dist + (gap_length - 1) * num_gaps_x as i64 + (gap_length - 1) * num_gaps_y as i64
 }
