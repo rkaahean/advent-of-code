@@ -31,8 +31,8 @@ fn main() {
         if same {
             let num_iters = (cycle_idx - seen_idx) as i32 + 1;
             let current_cycle = cycle_idx as i32;
-            let mult = ((1000000000.0  - current_cycle as f64)/ (num_iters as f64)).floor() as i32;
-            let new_start = current_cycle + mult*num_iters;
+            let mult = ((1000000000.0 - current_cycle as f64) / (num_iters as f64)).floor() as i32;
+            let new_start = current_cycle + mult * num_iters;
             for _ in new_start..1000000000 - 1 {
                 rocks = move_cycle(&rocks);
             }
