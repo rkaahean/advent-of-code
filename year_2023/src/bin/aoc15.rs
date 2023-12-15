@@ -1,4 +1,4 @@
-use std::{collections::HashMap, fs, ops::Index};
+use std::{collections::HashMap, fs};
 
 fn main() {
     const PATH: &str =
@@ -64,18 +64,13 @@ fn hash_algorithm(hash: &str) -> i32 {
 
 fn hash_algorithm_part_2(hash: &str) -> (&str, i32, i32) {
     let n = hash.len();
-
-    let mut lens_box = 0;
     let mut focal: i32 = -1;
-    let mut label = "";
+    let label;
     if hash.contains("-") {
         label = &hash[0..n - 1];
-        lens_box = hash_algorithm(label);
     } else {
         label = &hash[0..n - 2];
-        lens_box = hash_algorithm(label);
         focal = hash.chars().last().unwrap().to_digit(10).unwrap() as i32;
     }
-
-    (label, lens_box, focal)
+    (label, hash_algorithm(label), focal)
 }
