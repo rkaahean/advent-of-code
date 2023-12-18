@@ -25,17 +25,20 @@ fn main() {
         let down_row = part1(&beams, ((y_len - 1, j as i32), (-1, 0)));
 
         let row_max = up_row.max(down_row);
-        if row_max > mx { mx = row_max};
+        if row_max > mx {
+            mx = row_max
+        };
     }
 
     for i in 0..x_len {
         let up_col = part1(&beams, ((i as i32, 0), (0, 1)));
         let down_col = part1(&beams, ((i as i32, x_len - 1), (0, -1)));
         let row_max = up_col.max(down_col);
-        if row_max > mx { mx = row_max};
+        if row_max > mx {
+            mx = row_max
+        };
     }
     println!("Part 2 - {}", mx);
-
 }
 
 fn move_light(
